@@ -1,0 +1,570 @@
+\documentclass[12pt]{article}
+
+\usepackage[a4paper, margin=1in]{geometry}
+
+\begin{document}
+
+% ---------- COVER PAGE ----------
+\begin{titlepage}
+
+\centering
+
+\vspace*{2cm}
+
+{\Huge \textbf{TECHNICAL UNIVERSITY OF}}\\[0.2cm]
+{\Huge \textbf{KOSICE}}
+
+\vspace{6cm}
+
+{\LARGE \textbf{Habit Tracker Application}}
+
+\vfill
+
+\begin{flushleft}
+
+\textbf{Name:} Sri Vimal Sanmugam \\[0.3cm]
+
+\textbf{Subject:} Programming \\[0.3cm]
+
+\textbf{Supervisor:} Marek Horvath
+
+\end{flushleft}
+
+\vspace{1cm}
+
+2026
+
+\end{titlepage}
+
+\tab
+
+\tableofcontents
+\newpage
+
+\section{Abstract}
+
+This project describes the development of a Habit Tracking API using the Django web framework. 
+The system allows users to create, manage, and track habits using a REST-style API. 
+Instead of using a traditional database, the project stores all data in a JSON file 
+called \texttt{storage.json}. 
+
+The project demonstrates important backend development concepts such as CRUD operations, 
+persistent storage, error handling, input validation, sorting, searching, exporting data, 
+and resetting stored information. 
+
+The API was tested using Postman and implemented through a sequence of tasks designed 
+to gradually build a complete backend system.
+
+\section{Introduction}
+
+Habit tracking applications help users build productive routines by recording daily activities 
+such as exercising, reading, or studying. Many modern applications rely on backend APIs to manage 
+such data. APIs allow different applications to communicate using HTTP requests and JSON responses.
+
+In this project, a Habit Tracking API was developed using Django. The API supports operations such 
+as creating habits, retrieving stored habits, updating habit information, and deleting habits.
+
+Instead of storing data in a database system such as MySQL or PostgreSQL, this project uses 
+file-based persistence through a JSON file. This approach simplifies storage and allows the 
+system to maintain data even after restarting the server.
+
+\section{Project Objectives}
+
+The main objectives of this project were:
+
+\begin{itemize}
+
+\item Understand how REST APIs operate
+\item Learn backend development using Django
+\item Implement CRUD operations (Create, Read, Update, Delete)
+\item Implement persistent data storage using JSON files
+\item Add input validation and error handling
+\item Implement search and sorting features
+\item Export stored data
+\item Reset the stored data
+
+\end{itemize}
+
+The project also helps in understanding how backend systems manage data and handle client requests.
+
+\section{Technologies Used}
+
+\subsection{Python}
+
+Python was used as the primary programming language due to its simplicity and wide usage 
+in backend development.
+
+\subsection{Django}
+
+Django is a high-level Python web framework that allows developers to build secure 
+and maintainable web applications quickly. Django provides built-in tools for handling 
+requests, routing URLs, and generating responses.
+
+\subsection{JSON}
+
+JSON (JavaScript Object Notation) was used as the data storage format. 
+All habit data is stored in the file \texttt{storage.json}.
+
+\subsection{Postman}
+
+Postman was used to test API endpoints. It allows sending HTTP requests such as GET, 
+POST, PUT, and DELETE and inspecting server responses.
+
+\subsection{Visual Studio Code}
+
+Visual Studio Code was used as the development environment for writing and managing 
+the project code.
+
+\section{System Architecture}
+
+The architecture of the system is relatively simple and consists of three main components:
+
+\begin{itemize}
+
+\item Client (Postman or Web Browser)
+\item Django Backend Server
+\item JSON File Storage
+
+\end{itemize}
+
+The workflow is as follows:
+
+\begin{enumerate}
+
+\item The client sends an HTTP request to the API.
+\item Django processes the request.
+\item The server reads or updates data in the JSON file.
+\item The server sends a JSON response back to the client.
+
+\end{enumerate}
+
+\section{API Endpoints}
+
+The following API endpoints were implemented in the project.
+
+\section{API Endpoints}
+
+The following API endpoints were implemented in the project.
+
+\begin{center}
+\begin{tabular}{|l|l|l|}
+\hline
+\textbf{Method} & \textbf{Endpoint} & \textbf{Description} \\
+\hline
+POST & /api/habit/ & Create a new habit \\
+GET & /api/habit/all/ & Retrieve all habits \\
+GET & /api/habit/\{id\}/ & Retrieve habit by ID \\
+PUT & /api/habit/update/\{id\}/ & Update habit \\
+DELETE & /api/habit/delete/\{id\}/ & Delete habit \\
+GET & /api/habit/count/ & Return number of habits \\
+GET & /api/habit/export/ & Download JSON data \\
+DELETE & /api/habit/reset/ & Clear storage \\
+\hline
+\end{tabular}
+\end{center}
+
+\section{Project Implementation}
+
+The project was developed through a sequence of tasks.
+
+\subsection{Task 1: Initial API Creation}
+
+The first step involved creating a Django project and defining basic API endpoints. 
+Habit objects were initially stored in a Python list.
+
+\subsection{Task 2: Loading Data on Startup}
+
+A function was implemented to load data from the JSON file when the server starts. 
+This allows the system to restore previously saved data.
+
+\subsection{Task 3: Saving Data to File}
+
+Whenever a new habit is created, the updated list of habits is written to the JSON file.
+
+\subsection{Task 4: Updating Objects}
+
+An endpoint was implemented to modify existing habit objects.
+
+\subsection{Task 5: Deleting Objects}
+
+An endpoint was created to delete habits and update the JSON file accordingly.
+
+\subsection{Task 6: Safe File Loading}
+
+Error handling was added to ensure the application does not crash if the JSON file does not exist.
+
+\subsection{Task 7: Automatic ID Generation}
+
+Unique IDs were automatically generated using the maximum existing ID plus one.
+
+\subsection{Task 8: Retrieve Object by ID}
+
+An endpoint was implemented that retrieves a habit using its ID.
+
+\subsection{Task 9: Input Validation}
+
+Validation checks were added to ensure required fields are provided.
+
+\subsection{Task 10: Handling Invalid JSON}
+
+Exception handling was implemented to handle invalid JSON input.
+
+\subsection{Task 11: Search Function}
+
+Users can search habits using query parameters.
+
+Example:
+
+\begin{verbatim}
+GET /api/habit/all/?name=run
+\end{verbatim}
+
+\subsection{Task 12: Object Count}
+
+An endpoint returns the total number of stored habits.
+
+\subsection{Task 13: Sorting}
+
+Habits can be sorted using query parameters such as:
+
+\begin{verbatim}
+?sort=id
+?sort=-id
+\end{verbatim}
+
+\subsection{Task 14: Export Data}
+
+Users can download the JSON file containing all stored habits.
+
+\subsection{Task 15: Reset Storage}
+
+An endpoint clears all stored data and resets the JSON file.
+
+\section{Challenges Faced}
+
+During development several issues occurred:
+
+\begin{itemize}
+
+\item Internal server errors caused by undefined variables
+\item JSON decoding errors when invalid JSON was sent
+\item Issues with ID generation after deleting objects
+\item Understanding query parameters for sorting and search
+\item Debugging API errors in Postman
+
+\end{itemize}
+
+These issues were resolved through debugging and proper exception handling.
+
+\section{Testing}
+
+All endpoints were tested using Postman.
+
+The following tests were performed:
+
+\begin{itemize}
+
+\item Creating new habits
+\item Retrieving stored habits
+\item Updating habit information
+\item Deleting habits
+\item Searching habits
+\item Sorting habits
+\item Exporting JSON data
+\item Resetting storage
+
+\end{itemize}
+
+All operations produced correct results.
+
+\section{Results}
+
+The final API successfully performs all required operations while maintaining 
+persistent storage in a JSON file.
+
+The system supports full CRUD operations and additional features such as search, 
+sorting, exporting, and resetting data.
+
+\section{Security Note}
+
+In this project, encryption was implemented to protect sensitive data stored in files. 
+The file \texttt{storage.json}, which contains user habit data, was encrypted using 
+Fernet symmetric encryption from the cryptography library.
+
+The encryption key is generated and stored in a separate file named 
+\texttt{secret.key} during development. This ensures that the key is not mixed 
+directly with the application logic.
+
+To prevent exposing sensitive information, the key file is excluded from version 
+control using a \texttt{.gitignore} file. This avoids accidental leakage of the 
+encryption key when the project is uploaded to Git repositories.
+
+This implementation is intended for educational purposes only. In real-world 
+applications, more secure key management techniques would be used, such as 
+environment variables or dedicated secret management systems.
+
+
+\section{Authentication Implementation}
+
+\subsection{Introduction}
+In Week 6, authentication was introduced into the Habit Tracking API. The goal was to ensure that only authenticated users can access certain endpoints and that user-specific data is protected.
+
+\subsection{Login Endpoint}
+A login endpoint was implemented to allow users to authenticate using their username and password. Upon successful authentication, a token is generated and returned.
+
+\textbf{Endpoint:}
+\begin{verbatim}
+/login/
+\end{verbatim}
+
+\textbf{Method:} POST
+
+\textbf{Request Body:}
+\begin{verbatim}
+{
+"username": "admin",
+"password": "1234"
+}
+\end{verbatim}
+
+\textbf{Successful Response:}
+\begin{verbatim}
+{
+"message": "Login successful",
+"token": "generated_token_here"
+}
+\end{verbatim}
+
+\subsection{Token-Based Authentication}
+A custom token model was used to store authentication tokens associated with users. This token is required to access protected endpoints.
+
+\textbf{Header Format:}
+\begin{verbatim}
+Authorization: <token>
+\end{verbatim}
+
+\subsection{Protected Endpoint}
+The \texttt{/habits/} endpoint was protected so that only authenticated users can access their own habits.
+
+\textbf{Validation Steps:}
+\begin{itemize}
+\item Check if the Authorization token is present
+\item Validate the token using the database
+\item Retrieve the corresponding user
+\item Filter habits belonging only to that user
+\end{itemize}
+
+\subsection{Example Code Snippet}
+\begin{verbatim}
+token = request.META.get("HTTP_AUTHORIZATION")
+
+if not token:
+return JsonResponse({"error": "Token required"}, status=401)
+
+try:
+token_obj = AuthToken.objects.get(token=token)
+except AuthToken.DoesNotExist:
+return JsonResponse({"error": "Invalid token"}, status=401)
+
+user = token_obj.user
+\end{verbatim}
+
+\subsection{Error Handling}
+The following authentication-related errors were handled:
+\begin{itemize}
+\item Missing token (401 Unauthorized)
+\item Invalid token (401 Unauthorized)
+\item Invalid login credentials (401 Unauthorized)
+\item Missing username or password (400 Bad Request)
+\item Invalid JSON format (400 Bad Request)
+\item Incorrect HTTP method (405 Method Not Allowed)
+\end{itemize}
+
+\subsection{Testing}
+Authentication was tested using Postman with the following scenarios:
+\begin{itemize}
+\item Successful login with valid credentials
+\item Failed login with incorrect password
+\item Missing fields in login request
+\item Accessing protected endpoints without token
+\item Accessing protected endpoints with valid token
+\end{itemize}
+
+\section{Encryption and Data Protection}
+
+This week focused on improving the security of the application by introducing encryption and secure handling of sensitive data.
+
+\subsection{Task 1: Installing Cryptography Library}
+
+The \texttt{cryptography} library was installed using pip. The installation was verified by successfully importing the Fernet module, which is used for symmetric encryption.
+
+\subsection{Task 2: Encryption Utility Implementation}
+
+A separate Python file named \texttt{crypto\_utils.py} was created. This file contains functions for:
+
+\begin{itemize}
+\item Generating an encryption key
+\item Loading the encryption key from a file
+\item Encrypting files
+\item Decrypting files
+\end{itemize}
+
+This modular approach improves code readability and maintainability.
+
+\subsection{Task 3: File Encryption Testing}
+
+A sample JSON file (\texttt{storage.json}) was created and encrypted into a binary file (\texttt{storage\_encrypted.bin}). The encrypted file was not readable in plain text, confirming that encryption was successful. The file was then decrypted back to its original form to verify correctness.
+
+\subsection{Task 4: Encrypted Data Export}
+
+The existing export functionality was extended by adding a new endpoint:
+
+\begin{verbatim}
+/api/habit/export-encrypted/
+\end{verbatim}
+
+This endpoint encrypts the stored data before exporting it. As a result, sensitive data is protected and cannot be read directly without decryption.
+
+\subsection{Task 5: Handling Incorrect Keys}
+
+Error handling was implemented to manage incorrect decryption keys. When a wrong key is provided, the system does not crash. Instead, it catches the exception and returns a clear error message:
+
+\begin{verbatim}
+Invalid key. Cannot decrypt data.
+\end{verbatim}
+
+This ensures predictable and secure behavior.
+
+\subsection{Task 6: Protecting Sensitive Files}
+
+The encryption key file (\texttt{secret.key}) was excluded from version control by adding it to the \texttt{.gitignore} file. This prevents accidental exposure of sensitive information when the project is shared.
+
+\subsection{Task 7: Security Considerations}
+
+A security note was added to explain the encryption approach used in the project. The note highlights that:
+
+\begin{itemize}
+\item Sensitive data is encrypted using Fernet symmetric encryption
+\item The key is stored separately from the main code
+\item The key is not included in version control
+\item This implementation is intended for educational purposes
+\end{itemize}
+
+In real-world applications, more advanced key management techniques such as environment variables or secret management systems would be used.
+
+\section{Automated Testing and Validation}
+
+In Week 8, automated testing was implemented for the Habit Tracking System using Django's built-in \texttt{TestCase} framework. The goal was to ensure correctness, reliability, and robustness of the application through systematic testing.
+
+\subsection{Overview}
+A total of 12 test cases were implemented covering authentication, CRUD operations, filtering, file persistence, and system stability. All tests were executed successfully.
+
+---
+
+\subsection{Task 1: Create Tests Module}
+A dedicated \texttt{tests/} folder was created to organize test cases. The tests were divided into:
+\begin{itemize}
+    \item \texttt{test\_auth.py} for authentication testing
+    \item \texttt{test\_habit.py} for habit-related functionality
+\end{itemize}
+This modular structure improves readability and maintainability.
+
+---
+
+\subsection{Task 2: Basic Endpoint Testing}
+Basic tests were written to verify that API endpoints respond correctly. These tests checked:
+\begin{itemize}
+    \item API accessibility
+    \item Correct HTTP status codes (e.g., 200 OK)
+\end{itemize}
+
+---
+
+\subsection{Task 3: Create Habit Testing}
+Tests were implemented for habit creation functionality:
+\begin{itemize}
+    \item Valid input data returns success (status 200/201)
+    \item Invalid or missing input fields return error (status 400)
+\end{itemize}
+This ensures proper validation and prevents invalid data from being stored.
+
+---
+
+\subsection{Task 4: Search and Filtering Testing}
+Search and filtering features were tested by creating multiple habits with different attributes. The following were verified:
+\begin{itemize}
+    \item Search by habit name
+    \item Filter by completion status (\texttt{is\_completed})
+    \item Filter by frequency
+\end{itemize}
+These tests confirm that the system returns accurate filtered results.
+
+---
+
+\subsection{Task 5: Authentication Testing}
+Token-based authentication was tested with the following scenarios:
+\begin{itemize}
+    \item Successful login returns a valid token (status 200)
+    \item Invalid login returns unauthorized response (status 401)
+    \item Requests without a token are rejected (status 401)
+\end{itemize}
+This ensures secure access to protected endpoints.
+
+---
+
+\subsection{Task 6: File Persistence Testing}
+The system uses file-based storage for data persistence. Tests were conducted to verify:
+\begin{itemize}
+    \item Habit creation updates the storage file correctly
+    \item A temporary test file is used during testing to avoid modifying real data
+\end{itemize}
+This ensures safe and reliable file handling.
+
+---
+
+\subsection{Task 7: Stability Testing}
+The complete test suite was executed multiple times to verify stability. The results showed:
+\begin{itemize}
+    \item All tests passed consistently
+    \item No random failures or inconsistencies occurred
+\end{itemize}
+This confirms that the system is stable and reliable.
+
+---
+
+\subsection{Task 8: Fault Detection Testing}
+An intentional error was introduced into the validation logic of the create habit functionality. As a result:
+\begin{itemize}
+    \item The test suite failed and detected the issue
+    \item A database error occurred due to missing required fields
+\end{itemize}
+After restoring the correct validation logic:
+\begin{itemize}
+    \item All tests passed successfully
+\end{itemize}
+This demonstrates that the test suite is effective in identifying bugs.
+
+---
+
+\subsection{Final Results}
+The final test execution produced the following results:
+\begin{itemize}
+    \item Total Test Cases: 12
+    \item Execution Status: All Passed
+    \item System Status: Stable and Reliable
+\end{itemize}
+
+---
+
+
+\section{Conclusion}
+
+This project demonstrates how to build a complete REST-style API using Django 
+with file-based persistence. The project helped in understanding backend 
+development concepts including request handling, validation, persistence, 
+and API design.
+
+The final system is functional and can serve as a foundation for more advanced 
+applications that use databases and user authentication.
+
+\end{document}

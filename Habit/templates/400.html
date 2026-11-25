@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>400 Error</title>
+
+{% load static %}
+
+<style>
+body{
+    text-align:center;
+    font-family:Arial;
+}
+
+img{
+    width:350px;
+    margin-top:40px;
+}
+
+a{
+    display:inline-block;
+    margin-top:20px;
+    padding:8px 15px;
+    background-color:#4CAF50;
+    color:white;
+    text-decoration:none;
+    border-radius:5px;
+}
+</style>
+
+</head>
+
+<body>
+
+<h1>⚠ 400 Error</h1>
+
+<img src="{% static 'images/400.avif' %}" alt="400 error">
+
+<p>Please fill all fields before saving the habit.</p>
+
+<a href="/">Go Back</a>
+
+</body>
+</html>

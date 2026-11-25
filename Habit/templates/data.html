@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Saved Habits</title>
+</head>
+
+<body>
+
+<h2>Saved Habits</h2>
+
+<table border="1">
+
+<tr>
+<th>ID</th>
+<th>Habit</th>
+<th>Frequency</th>
+<th>Description</th>
+<th>Date</th>
+<th>Delete</th>
+</tr>
+
+{% for item in data %}
+
+<tr>
+<td>{{ item.id }}</td>
+<td>{{ item.habit }}</td>
+<td>{{ item.frequency }}</td>
+<td>{{ item.description }}</td>
+<td>{{ item.date }}</td>
+
+<td>
+<a href="/delete/{{ item.id }}/">Delete</a>
+</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+<br>
+
+<a href="/">Add New Habit</a>
+
+</body>
+</html>

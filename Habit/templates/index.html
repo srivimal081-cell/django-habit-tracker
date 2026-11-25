@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Habit Tracker</title>
+
+<style>
+
+body{
+font-family: Arial, sans-serif;
+background-color:#f5f5f5;
+padding:20px;
+}
+
+h1{
+margin-bottom:20px;
+}
+
+label{
+display:block;
+margin-top:15px;
+}
+
+input, select, textarea{
+width:250px;
+padding:6px;
+margin-top:5px;
+}
+
+button{
+margin-top:15px;
+padding:8px 12px;
+background-color:#4CAF50;
+color:white;
+border:none;
+cursor:pointer;
+}
+
+button:hover{
+background-color:#45a049;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1>Habit Tracker</h1>
+
+<form id="habitForm">
+
+<label>Habit Name:</label>
+<input type="text" id="name" required>
+
+<label>Frequency:</label>
+<select id="frequency">
+<option value="daily">Daily</option>
+<option value="weekly">Weekly</option>
+<option value="monthly">Monthly</option>
+</select>
+
+<label>Description:</label>
+<textarea id="description"></textarea>
+
+<label>Date:</label>
+<input type="date" id="date" required>
+
+<br>
+
+<button type="submit">Save Habit</button>
+
+</form>
+
+<script>
+
+document.getElementById("habitForm").addEventListener("submit", function(e){
+
+e.preventDefault();
+
+const habitData = {
+name: document.getElementById("name").value,
+frequency: document.getElementById("frequency").value,
+date: document.getElementById("date").value
+};
+
+fetch("/api/habit/",{
+method:"POST",
+headers:{
+"Content-Type":"application/json"
+},
+body: JSON.stringify(habitData)
+})
+.then(response => response.json())
+.then(data => {
+alert("Habit saved successfully!");
+document.getElementById("habitForm").reset();
+})
+.catch(error=>{
+alert("Error saving habit");
+});
+
+});
+
+</script>
+
+</body>
+</html>
